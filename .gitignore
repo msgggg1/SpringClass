@@ -43,3 +43,6 @@ buildSrc/build/
 
 # STS 관련 캐시파일
 .sts4-cache/
+
+# Server configuration and temporary files
+Servers/
