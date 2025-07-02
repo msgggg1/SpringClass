@@ -334,6 +334,15 @@ button.del::before {
 	font-size: 1.25rem;
 }
 
+button.alldel::before {
+	font-family: var(--icon-font);
+  	content: 'delete_forever';
+	position: absolute;
+	left: 11px;
+	top: 4px;
+	font-size: 1.25rem;
+}
+
 
 button.edit::before {
 	font-family: var(--icon-font);

@@ -31,14 +31,11 @@
 			type : 'get',
 			url : '/emp/check',
 			data : {empno: vempno},
-			contentType : "application/json; charset=utf-8",
 			cache:false, 
 			success: function (result, status, xhr ){
-				console.log(result);
-				console.log(typeof result);
-				if (result == 1) {
+				if (result === 'duplicate') {
 		        	$("#idCheckResult").text("이미 사용 중인 아이디 입니다.")					
-				} else if(result == 0){
+				} else {
 		        	$("#idCheckResult").text("사용가능한 아이디 입니다.")					
 				}
 	       },
