@@ -1,0 +1,79 @@
+[수업 내용 정리]
+
+N-tier
+[ 3-Tier(티어) 방식 ]
+[1] Presentation Tier (프레젠테이션 계층)		: 화면 계층
+[2] Business Logic Tier (비즈니스 로직 계층) : 로직 계층
+[3] Data Tier (데이터 계층) 				:영속 계층(Persistance Tier)
+
+스프링 MVC
+
+> 패키지의 이름 명명.
+org.doit.ik  최상위 패키지
+  ㄴ config      프로젝트 관련  설정
+  ㄴ controller 컨트롤러
+              ㄴ service     서비스
+                 ㄴ domain       VO, DTO 객체
+  ㄴ persistence  DAO, mybatis(-> mapper)
+  ㄴ exception    예외처리
+  ㄴ aop             스프링 AOP
+  ㄴ security       스프링 보안(인증,권한)
+  ㄴ util              각종 유용한 유틸리티
+  
+> 테이블, 시퀀스 생성
+  CREATE TABLE tbl_board
+    (
+        bno number(10)
+      , title varchar2(200) not null
+      , content varchar2(2000) not null
+      , writer varchar2(50) not null
+      , regdate date default sysdate
+      , updatedate date default sysdate
+    );
+    
+    alter table tbl_board add constraint pk_tblboard_bno primary key(bno);
+    
+   CREATE SEQUENCE seq_board;   
+   
+> 스토리보드
+	ㄴ PowerPoint / Pencil Mockup 툴 : 화면 설계
+
+> domain 패키지
+	ㄴ BoardVO.java
+	
+> 게시판 글 목록 보기
+  1) home.jsp
+  	 <a href = "/board/list">게시글 목록</a>
+  2) org.doit.ik.mapper 패키지
+  		ㄴ BoardMapper.java
+  	 BoardMapper.java
+  	 src/main/resources
+  	 	ㄴ org
+  	 		ㄴ doit
+  	 			ㄴ ik
+  	 				ㄴ mapper
+  	 					ㄴ BoardMapper.xml
+  	 BoardMapper.xml
+  
+  3) org.doit.ik.service 패키지
+  	 ㄴ BoardService.java
+  
+  4) org.doit.ik.controller 패키지
+  	ㄴ BoardController.java
+  	
+> 게시글 목록 구현
+ 1) home.jsp
+    게시글 목록 링크태그 클릭
+ 2) /board/list 요청을 처리하는 BoardController.java
+ 							  ㄴ 컨트롤러 메서드    뒤에서부터
+
+> 게시글 쓰기
+  <a href="/board/register">글쓰기</a>
+  1) BoardController.java
+  2) BoardService.java
+  3) BoardMapper.java
+  	 BoardMapper.xml
+  4) register.jsp
+  ------------------------------------------------------------------
+  
+   							  

@@ -1,0 +1,18 @@
+[수업 내용 정리]
+
+문제) 아이디 입력받아서 중복체크하는 ajax 처리
+  ( 아이디 == empno 로 처리 ) 
+  
+  SL00_DefaultSettings 복사 붙이기 -> SL02_REST_TEST
+  
+  1) org.doit.ik
+       ㄴ EmpController.java
+  2) org.doit.ik.service
+       ㄴ EmpService.java
+       ㄴ EmpServiceImpl.java
+  3) org.doit.ik.domain
+       ㄴ EmpDTO.java
+  4) org.doit.ik.mapper
+       ㄴ EmpMapper.java     
+     EmpMapper.xml     
+  5) home.jsp 사용.    

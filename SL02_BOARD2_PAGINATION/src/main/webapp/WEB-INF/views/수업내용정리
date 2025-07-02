@@ -1,0 +1,15 @@
+[수업 내용 정리]
+1. SL02_BOARD -> SL02_BOARD2_PAGINATION
+2. 게시판		+ 페이징 처리 추가 코딩
+
+3. 페이징 처리 구현
+  1) org.doit.ik.domain 패키지
+  		ㄴ Criteria.java		== 기준, 표준, 척도 (현재페이지 정보만 가지고 있음)
+  			현재 페이지 번호
+  			한 페이지에 출력할 게시글 수 
+  2) 	ㄴ PageDTO.java
+  3) BoardMapper.java 구현
+  		ㄴ List<BoardVO> getListWithPaging( c c)
+  		ㄴ int getTotalCount( C c)
+  4) BoardMapper.xml 구현
+  5) BoardService.java 만들기 전에 BoardMapper.java+xml 단위 테스트

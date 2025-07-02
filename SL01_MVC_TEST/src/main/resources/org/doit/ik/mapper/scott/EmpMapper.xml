@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.doit.ik.mapper.scott.EmpMapper">
+	<!-- WHERE 동적쿼리 + mybatis -->
+	<select id="selectEmp" resultType="org.doit.ik.domain.EmpDTO">
+		SELECT *
+		FROM emp
+		<where>
+			<foreach item="deptno" collection="array"
+				open="deptno in (" separator="," close=")" >
+				#{deptno}
+			</foreach>
+		</where>
+		ORDER BY deptno ASC
+	</select>
+
+<!-- [1]	
+	<select id="selectEmpDept" resultType="org.doit.ik.domain.EmpDTO">
+		SELECT *
+		FROM emp
+		WHERE deptno = #{deptno}
+		ORDER BY deptno ASC
+	</select> 
+-->
+<!-- [2]
+	deptno !=0 -> WHERE deptno = #{deptno}
+	deptno == 0 -> IS NULL	
+ -->
+	<select id="selectEmpDept" resultType="org.doit.ik.domain.EmpDTO">
+		SELECT *
+		FROM emp
+		<where>
+			<if test="deptno == 0">
+				deptno IS NULL
+			</if>
+			<if test="deptno != 0">
+				deptno = #{deptno}
+			</if>		
+		</where>
+		ORDER BY deptno ASC
+	</select>
+
+</mapper>
