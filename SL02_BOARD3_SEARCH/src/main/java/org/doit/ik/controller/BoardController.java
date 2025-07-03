@@ -42,8 +42,7 @@ public class BoardController {
 		// list.jsp 포워딩 : 페이징 블럭 출력
 		int total = this.boardService.getTotal(criteria);
 		model.addAttribute("pageMaker", new PageDTO(criteria, total));  
-	}
-	
+	}	
 
 	@GetMapping(value = "/register")
 	public void register() {
@@ -97,16 +96,24 @@ public class BoardController {
 	public String modify(BoardVO boardVO, RedirectAttributes rttr, Criteria criteria) { // 커맨드객체
 		log.info(">BoardController.modify() - POST");
 		if (this.boardService.modify(boardVO)) {
-			rttr.addFlashAttribute("result", "SUCCESS");	
+				rttr.addFlashAttribute("result", "SUCCESS");
+			}	
+			/*
 			rttr.addAttribute("bno",boardVO.getBno());
+			
 			rttr.addAttribute("pageNum", criteria.getPageNum());
 			rttr.addAttribute("amount", criteria.getAmount());
+			rttr.addAttribute("keyword", criteria.getKeyword());
+			rttr.addAttribute("type", criteria.getType());
 		};
 		
 		//[1]
 		//return String.format("redirect:/board/get?bno=%d", boardVO.getBno());
 		//[2]
 		return "redirect:/board/get";
+		*/
+		String queryString = criteria.getListLink();
+		return String.format("redirect:/board/get%s&bno=%d", queryString, boardVO.getBno());			
 	}
 	
 	@GetMapping(value = "/remove")

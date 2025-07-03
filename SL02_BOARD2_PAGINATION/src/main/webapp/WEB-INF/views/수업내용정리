@@ -13,3 +13,18 @@
   		ㄴ int getTotalCount( C c)
   4) BoardMapper.xml 구현
   5) BoardService.java 만들기 전에 BoardMapper.java+xml 단위 테스트
+  
+  6) BoardService
+  	// [2] 페이징 처리 O + 목록
+	List<BoardVO> getListWithPaging(Criteria criteria);
+	int getTotal(Criteria criteria);
+	
+  7) 목록 -> 상세보기 페이지로 이동
+  			[목록] 버튼 클릭  -> 2번 페이지로 이동
+  	 1  [2]
+  	 
+  8) 삭제된 후에도 pageNum, amount 유지된 채로 list 보기
+  
+  [믄제]
+  		
+	

@@ -61,8 +61,12 @@
      </table>
      
      <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
-       
+     <input type="hidden" name="pageNum" value="${criteria.pageNum}">
+  	 <input type="hidden" name="amount" value="${criteria.amount}"> 
+  	
   </form> 
+
+  
   
 </div>
 
@@ -96,13 +100,19 @@
 				}
 
 			}else if(operation == "list"){
+				
+				const pageNumClone = $(":hidden[name='pageNum']").clone();
+				const pageAmountClone = $(":hidden[name='amount']").clone();
+				
 				formObj
-				.attr({
-					"action": "/board/list",
-					"method": "get" // get 방식일때 파라미터?
-				})
-				.empty() // form 태그안 자식요소들 다 비우고 감.
-				.submit();
+					.attr({
+						"action": "/board/list",
+						"method": "get" 
+					})
+					.empty()
+					.append(pageNumClone)
+					.append(pageAmountClone)
+					.submit();
 			}
 		}) // $("tfoot button").on("click", function)({
 			

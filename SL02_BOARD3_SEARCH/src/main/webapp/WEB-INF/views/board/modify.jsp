@@ -62,6 +62,9 @@
      <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
      <input type="hidden" name="pageNum" value="${criteria.pageNum}">
   	 <input type="hidden" name="amount" value="${criteria.amount}">
+  	 <!-- 검색조건, 검색어 -->
+  	 <input type="hidden" name="type" value="${criteria.type}">
+  	 <input type="hidden" name="keyword" value="${criteria.keyword}">
        
   </form>    
 </div>
@@ -82,6 +85,8 @@
 			}else if(operation == "list"){
 				const pageNumClone = $(":hidden[name='pageNum']").clone();
 				const pageAmountClone = $(":hidden[name='amount']").clone();
+				const pageTypeClone = $(":hidden[name='type']").clone();
+				const pageKeywordClone = $(":hidden[name='keyword']").clone();
 				
 				formObj
 					.attr({
@@ -91,6 +96,8 @@
 					.empty()
 					.append(pageNumClone)
 					.append(pageAmountClone)
+					.append(pageTypeClone)
+					.append(pageKeywordClone)
 					.submit();
 			}
 		}) // $("tfoot button").on("click", function)({

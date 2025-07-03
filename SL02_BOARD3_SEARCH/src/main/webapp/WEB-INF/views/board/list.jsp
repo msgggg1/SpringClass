@@ -65,6 +65,28 @@
            </c:forEach>
          </c:otherwise>
        </c:choose>
+       
+       <!-- 검색 부분 -->
+       <tr>
+       	<td colspan="5" align="center">
+       		<form id="searchForm" action="/board/list" method="get">
+       			<select id="type" name="type">
+       				<option value="T">제목</option>
+       				<option value="C">내용</option>
+       				<option value="W">작성자</option>
+       				<option value="TC">제목+내용</option>
+       				<option value="TW">제목+작성자</option>
+       				<option value="TCW">제목+내용+작성자</option>
+       			</select>
+       			<input type="text" name="keyword" style="padding: 7px">
+       			<button type="button" style="min-height: 32px">Search</button>
+       			
+       			<input type="hidden" name="pageNum" value="${pageMaker.criteria.pageNum}">
+  				<input type="hidden" name="amount" value="${pageMaker.criteria.amount}">
+       		</form>
+       	</td>
+       </tr>
+       
     </tbody>
     <tfoot>
       <tr>
@@ -94,6 +116,8 @@
   	<input type="hidden" name="pageNum" value="${pageMaker.criteria.pageNum}">
   	<input type="hidden" name="amount" value="${pageMaker.criteria.amount}">
   	<!-- 검색조건, 검색어 등등 -->
+  	<input type="hidden" name="type" value="${pageMaker.criteria.type}">
+  	<input type="hidden" name="keyword" value="${pageMaker.criteria.keyword}">
   </form>
   
 </div>
@@ -140,6 +164,32 @@
 				.append(`<input type="hidden" name="bno" value="\${bno}">`)
 				.submit();
 			}); // $("a.move").on("click", function(){
+				
+			
+			// 검색 버튼 클릭 처리
+			var searchForm = $("#searchForm");
+
+			$("#searchForm button").on("click", function(){
+				
+				if (!searchForm.find("input[name=keyword]").val()) {
+					alert("검색어(keyword)를 입력하세요");
+					return;
+				}// if
+				
+				event.preventDefault();
+				searchForm.find("input[name=pageNum]").val(1);
+				searchForm.submit();
+			})// $("#searchForm button").on("click", function(){
+				
+		  	// 검색조건  상태관리 
+		   $("#type").val('${ empty param.type ? "T" : param.type }');   
+		   $("#searchForm [name=keyword]").val('<c:out value="${pageMaker.criteria.keyword}"/>');
+		   
+			/* var $input = $("input[name='keyword']");
+			$input.val("${pageMaker.criteria.keyword}");
+			
+			$("#type").val("${pageMaker.criteria.type}"); */
+			
 		
 	})//$(function(){
 </script>
