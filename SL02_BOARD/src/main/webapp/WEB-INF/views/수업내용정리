@@ -3,8 +3,8 @@
 N-tier
 [ 3-Tier(티어) 방식 ]
 [1] Presentation Tier (프레젠테이션 계층)		: 화면 계층
-[2] Business Logic Tier (비즈니스 로직 계층) : 로직 계층
-[3] Data Tier (데이터 계층) 				:영속 계층(Persistance Tier)
+[2] Business Logic Tier (비즈니스 로직 계층)		: 로직 계층
+[3] Data Tier (데이터 계층) 					:영속 계층(Persistance Tier)
 
 스프링 MVC
 

@@ -21,7 +21,6 @@ public class HomeController {
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
-	 * 컨트롤러 메서드
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -36,5 +35,5 @@ public class HomeController {
 		
 		return "home";
 	}
-	
+	// 핸들러 하나에 해당하는 코딩
 }

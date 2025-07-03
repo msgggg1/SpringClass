@@ -26,10 +26,10 @@ public class EmpController {
 	private EmpService empService;
 	
 	@GetMapping(value = "/emp/check")
-	public void idCheck(Model model, @RequestParam int empno) {
+	public String idCheck(Model model, @RequestParam int empno) {
 		
 		log.info("> EmpController.idCheck()");
-		model.addAttribute("idCheckResult", this.empService.idCheck(empno));
+		return this.empService.idCheck(empno) == 1 ? "duplicate" : "Available";		
 	}
 	
 }
