@@ -19,7 +19,7 @@ public class BoardServiceImpl implements BoardService{
 	
 	// DI(의존성 주입)
 	//@Autowired
-	//@Setter(onMethod=@__({@AnnotationsGoHere}))
+	//@Setter(onMethod=@__({@AnnotationsGoHere})) // 롬복에서 자동 주입
 	private BoardMapper boardMapper;
 	
 	@Override
