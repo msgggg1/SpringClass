@@ -22,6 +22,7 @@ public class ex01 {
 		// RecordViewImpl rvi = new RecordViewImpl(record);	// B에게 A 주입
 		// [2] 주입 방법 : setter 
 		RecordViewImpl rvi = new RecordViewImpl(); // B에게 A 주입 rvi.setRecord(record);
+		rvi.setRecord(record);
 
 		
 		rvi.input(); 	// 성적 입력
