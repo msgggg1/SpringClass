@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- p.104 어노테이션 기반의 의존 자동 주입 설정 -->
+	<!-- <context:annotation-config /> -->
+	<!-- p.117 컴포넌트 스캔 설명 전처리기 자동 등록됨 -->
+	<context:component-scan base-package="org.doit.ik.di6" /><!-- 모든 하위페이지 스캔 -->
+		
+	<bean id="user1" class="org.doit.ik.di6.User">
+		<constructor-arg value="bkchoi"></constructor-arg>
+		<constructor-arg value="1234"></constructor-arg>
+	</bean>
+
+	<bean id="user2" class="org.doit.ik.di6.User" c:id="madvirous"
+		c:password="qwsr">
+	</bean>
+
+
+</beans>

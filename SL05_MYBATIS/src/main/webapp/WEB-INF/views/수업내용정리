@@ -1,0 +1,29 @@
+[ 수업내용정리.txt ]
+
+> p.563 Mybatis 연동 지원
+https://mybatis.org/mybatis-3/ko/index.html
+
+1. pom.xml 모듈 추가
+	mybatis
+	mybatis-spring
+	spring-context
+	spring-jdbc
+	
+2. SqlSessionFactoryBean 객체 ? 스프링 + mybatis 연동 처리하는 객체
+	1) root-context.xml
+	<!-- p91 -->
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+	  <property name="dataSource" ref="dataSource"></property>
+	  <property name="configLocation" value="classpath:org/doit/ik/mapper/mybatis-config.xml"></property>
+	</bean>
+	
+3. 트랜잭션 설정
+	<!-- p508 스프링 트랜잭션을 처리할 JDBC기반의 트랜잭션 관리자 등록
+	 Spring JDBC 또는 mybatis DB처리 -->
+   <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+     <property name="dataSource"  ref="dataSource" />
+   </bean>
+   
+4. DAO
+	1) sqlSession을 이용한 DAO 구현
+	2) 매퍼 동적 생성 이용한 DAO 구현
