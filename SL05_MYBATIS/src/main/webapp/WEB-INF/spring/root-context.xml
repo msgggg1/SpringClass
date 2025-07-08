@@ -26,14 +26,46 @@
 	  <constructor-arg ref="hikariConfig"></constructor-arg>
 	</bean>
 	
-	<!-- p91 -->
-	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<!-- [1] p91 -->
+<!-- 	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+	  <property name="dataSource" ref="dataSource"></property>SetDataSource
+	  <property name="configLocation" value="classpath:org/doit/ik/mapper/mybatis-config.xml"></property>SetConfigLocation
+	  					ㄴ 환경설정 파일
+	</bean> -->
+	
+	<!-- p566 -->
+	<!-- DAO , DAOImpl 따로 구현 x -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 	  <property name="dataSource" ref="dataSource"></property>
-	  <property name="configLocation" value="classpath:org/doit/ik/mapper/mybatis-config.xml"></property>
+	  <property name="mapperLocations">
+	  	<list>
+	  		<value>classpath:/mybatis/DeptMapper.xml</value>
+	  	</list>
+	  </property>
+	  <property name="typeAliases">
+	  	<list>
+	  		<value>org.doit.ik.domain.DeptDTO</value>
+	  	</list>
+	  </property>
 	</bean>
+	
+	<!-- mybatis DAO 구현 방법 2가지 중에 1가지 -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"><!-- st,s,ss 위함 -->
+		<constructor-arg ref="sqlSessionFactory"></constructor-arg><!-- 팩토리에서 얻어와야함 -->
+	</bean>
+	
+	<!-- 자동 매퍼 객체 p569 단일 매퍼 인터페이스 -> 객체 생성
+	<bean id="DeptMapperDao3" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface">
+			<value>org.doit.ik.mapper.DeptMapper</value>
+		</property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	-->
 		
-	<!-- p95 -->
+	<!-- [1] p95 -->
 	<mybatis-spring:scan base-package="org.doit.ik.mapper"/>
+	
 	
 	<!-- p508 스프링 트랜잭션을 처리할 JDBC기반의 트랜잭션 관리자 등록
 	 Spring JDBC 또는 mybatis DB처리 -->

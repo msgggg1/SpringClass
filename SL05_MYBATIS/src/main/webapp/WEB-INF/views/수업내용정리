@@ -3,9 +3,16 @@
 > p.563 Mybatis 연동 지원
 https://mybatis.org/mybatis-3/ko/index.html
 
+root-context.xml
+	ㄴ 히카리풀
+	ㄴ DB 연동하려면 dataSource필요
+	ㄴ SqlSessionFactoryBean
+
+sqlsession: 직접 DAO 구현x, 찍어내는 공장
+
 1. pom.xml 모듈 추가
 	mybatis
-	mybatis-spring
+	spring-mybatis
 	spring-context
 	spring-jdbc
 	
@@ -27,3 +34,30 @@ https://mybatis.org/mybatis-3/ko/index.html
 4. DAO
 	1) sqlSession을 이용한 DAO 구현
 	2) 매퍼 동적 생성 이용한 DAO 구현
+	
+5. 실습
+   1) domain.DeptDTO.java
+   2) views/scott/dept.jsp
+   3) src/main/resources/mybatis/DeptMapper.xml
+   4) mapper.DeptMapper.java
+   5) ScottController.java
+   
+
+7. DAO
+	1) sqlSessionTemplate을 이용한 DAO 구현 p567
+	X ItemDao 인터페이스 -> MybatisItemDao 구현
+	DeptMapper.java 인터페이스 -> DeptMapperDao.java 구현
+	
+	
+	2) 매퍼 동적 생성 이용한 DAO 구현 p569
+	
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
