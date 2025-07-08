@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class TimeMybatisController {
 	
 	// DI
-	@Autowired
+	@Autowired(required = false)
 	private TimeMapper timeMapper;
 	
 	private static final Logger logger = LoggerFactory.getLogger(TimeMybatisController.class);

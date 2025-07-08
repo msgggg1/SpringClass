@@ -1,0 +1,13 @@
+1. Mybatis 실습 3
+  
+   - 조인(join) 처리
+   - dept/emp/salgrade  테이블 조인 
+   - dept/emp   요청URL
+   - DeptEmpSalgradeMapper.xml  매퍼 XML 파일
+   
+   - 매퍼 XML 파일을 수정
+   	  ㄴ <resultMap> 태그를 사용해서 수정
+   	  	ㄴ '데이터베이스 결과데이터를 객체에 로드'하는 방법을 정의하는 엘리먼트
+   	  	ㄴ ResultSet에서 데이터를 가져올때 작성되는 JDBC코드를 대부분 줄여주는 역할을 담당한다.
+   	  	ㄴ 복잡한 구문에서 관계를 서술하기 위해 필요하다.
+   	  	
