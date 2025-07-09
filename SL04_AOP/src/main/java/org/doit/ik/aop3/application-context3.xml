@@ -8,8 +8,7 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 
 	<!-- 아래 코딩 하나 끝 -->
-	<context:component-scan
-		base-package="org.doit.ik.aop3" />
+	<context:component-scan base-package="org.doit.ik.aop3" />
 
 	<aop:config>
 		<aop:aspect id="traceAspect" ref="logPrintProfiler3">
