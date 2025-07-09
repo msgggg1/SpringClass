@@ -1,5 +1,7 @@
 package org.doit.ik.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -19,8 +21,11 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import lombok.extern.log4j.Log4j;
+
 // 공지사항 관련
 @Controller
+@Log4j
 @RequestMapping("/customer/*")
 public class CustomerController {
 
@@ -90,6 +95,39 @@ public class CustomerController {
 		
 		int rowcount = noticeDao.insert(notice);
 		rttr.addFlashAttribute("result", rowcount);
+		
+		log.info("> CmrUploadController.multiupload() 호출됨 + POST");
+		log.info("-".repeat(30));
+		
+		//2.<div><input type="file" name="attach" multiple="multiple" ></div>
+		List<CommonsMultipartFile> fileList = notice.getFile();
+		
+		for (CommonsMultipartFile file : fileList) {
+			
+			if (!file.isEmpty()) { // 업로드된 파일 있는지 
+				log.info("-".repeat(30));
+				String originalFileName = file.getOriginalFilename();
+				log.info("2. originalFileName :" + originalFileName);
+				long fileSize = file.getSize();
+				log.info("3. Size :" + fileSize);
+				
+				// 업로드된 파일 저장
+				String parent = "C:\\upload";
+				File dest = new File(parent, originalFileName);
+				try {
+					file.transferTo(dest);
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					//e.printStackTrace();
+					log.info(e.toString());
+				}
+			}// if
+			
+		}
+		
+		
+		log.info(" end.  ");	
 		
 		return "redirect:notice.htm";
 	}
