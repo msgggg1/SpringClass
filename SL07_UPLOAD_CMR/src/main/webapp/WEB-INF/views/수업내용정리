@@ -1,0 +1,25 @@
+[ 수업내용정리 ]
+
+1. Commons FileUpload API를 이용해서 업로드 파일을 처리
+	ㄴ CommonsMultipartResolver 빈 등록 : servlet-context.xml
+	
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    	<beans:property name="maxUploadSize" value="-1"></beans:property>
+    	<beans:property name="maxInMemorySize" value="10240"></beans:property>
+    	<beans:property name="defaultEncoding" value="UTF-8"></beans:property>
+    </beans:bean>
+	
+	ㄴ 스프링 MVC에서 전송된 파일 데이터를 사용할 수 있도록 변환하는 역할
+	
+2.URL 요청
+  /cmr/upload 요청 -> /cmr/upload.jsp 응답 페이지
+
+  Message 클래스 선언
+  output
+  attach
+  
+3. post 요청
+
+
+
+같은 파일 -> 덮어쓰기 -> 직접 구현

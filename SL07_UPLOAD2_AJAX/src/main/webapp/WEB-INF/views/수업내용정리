@@ -1,0 +1,8 @@
+1. webapp
+	ㄴ ajax 폴더 생성
+		ㄴ upload 파일 생성
+		
+ 서블릿 3.0 -> 톰켓 쓰겠다
+ 
+ AjaxUploadController.java
+ 

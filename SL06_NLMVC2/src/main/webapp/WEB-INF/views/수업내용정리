@@ -1,0 +1,60 @@
+[수업내용정리]
+1. SL06_NLMVC -> SL06_NLMVC2
+2. SL06_NLMVC 프로젝트의 문제점 파악
+  1) 공지사항 목록		: NoticeController 클래스 필요
+  	 공지사항 상세보기	: NoticeDetailController 클래스 필요
+  	 :							:
+  	 :							: 각 기능별 컨트롤러 클래스 필요
+  	 -> 1개의 공지사항 컨트롤러 추가하고 각각의 요청을 컨트롤러 메서드가 처리하도록 구현
+  2) servlet-context.xml
+     <bean>
+     <bean>
+     <bean>
+		:
+		:
+	-> 자동 빈 객체 생성 등록 컴포넌트 스캔으로 처리
+	
+	<!-- [1]  삭제-->
+	<beans:bean class="org.doit.ik.persistence.NoticeDao" id="noticeDao"></beans:bean>
+	-> 1) NoticeDao @Repository 
+	   2) Servlet-context.xml <context:component-scan base-package="org.doit.ik" /> 
+	   
+	<!-- 삭제 [2] name 속성값으로 요청 url을 설정 -->
+	<beans:bean name="/customer/notice.htm" class="org.doit.ik.controller.NoticeController">
+		<beans:constructor-arg ref="noticeDao" />
+	</beans:bean>
+	
+	<beans:bean name="/customer/noticeDetail.htm" class="org.doit.ik.controller.NoticeDetailController">
+		<beans:constructor-arg ref="noticeDao" />
+	</beans:bean> 
+	
+3. 공지사항 [ 쓰기 ]
+  1) <a class="btn-write button" href="noticeReg.htm">글쓰기</a>
+  2) NoticeDao.insert(NoticeVO notice) 메서드 확인 
+  3) 컨트롤러 메서드 선언
+  
+3-2. 공지사항 [수정], 삭제
+  1) 공지사항 상세보기 페이지 (noticeDetail.jsp) 의 "수정하기" 버튼 클릭
+  <a class="btn-edit button" href="noticeEdit.htm">수정</a>
+  2) 
+
+3-3. 공지사항 [ 삭제 ]
+  1) 삭제 권한 확인 X -> 이유? 인증 후에 버튼 활성화 .. 
+  
+     
+4. 공지사항 쓰기 + 파일 업로드
+<form action + post>
+1) 컨트롤러 메서드 선언
+
+      
+
+
+
+
+
+
+
+
+
+
+   
