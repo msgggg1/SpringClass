@@ -1,0 +1,31 @@
+[수업내용정리] 파일 업로드
+
+p.473 Chapter 11 데이터베이스 연동 지원과 JDBC 지원
+[ 스프링 JDBC ]
+1. DataSource 설정
+
+2. JdbcTemplate 같은 클래스를 이용 - 똑같은 코딩의 중복 -> 실수 -> 기본적인 틀 템플릿 클래스(jdbc 연동). DB처리하는데 중복코딩 제거한 것
+
+
+pom.xml
+<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+	  <!-- 	p102
+	  <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+	  <property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:XE"></property>
+	   -->	   
+	  <property name="driverClassName"	 value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+	  <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"></property>
+	  <property name="username" value="scott"></property>
+	  <property name="password" value="tiger"></property> 
+	</bean>
+	
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+	  <constructor-arg ref="hikariConfig"></constructor-arg>
+	</bean><!-- 히카리CP 외부라이브러리 이용해서 dataSource얻어오는것 -->
+	
+	
+query()
+queryForList()
+queryForObject()
+update()
+

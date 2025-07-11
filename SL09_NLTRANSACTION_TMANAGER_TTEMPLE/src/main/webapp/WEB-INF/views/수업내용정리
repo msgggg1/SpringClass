@@ -1,0 +1,53 @@
+[수업내용정리] 스프링 트랜잭션 처리
+
+1. SL08_NLJDBC2 -> SL09_NLTRANSACTION_TMANAGER_TTEMPLE
+p505 chapter12 스프링의 트랜잭션 관리
+
+2. TransactionManager 등록 -> root-context.xml
+	Spring JDBC, Mybatis -> DataSourceTransactionManager 등록
+	
+	컨트롤러마다 컨테이너 한개씩 만들어짐. 서로 주고받지 못함
+	모든 스프링 컨테이너에서 공통적으로 쓰는 작업(DB 등) -> root-context.xml에 설정
+	
+	1. 
+	2. 사용하는 툴 맞춰서 매니저
+	3. 자바코드기반 - 선언적(xml, 어노테이션**), 트랜잭션 분산환경 처리..
+	
+3. 실습 내용
+  1) 공지사항 글 쓰기 + 포인트 증가 트랜잭션 처리
+  	 공지사항의 새 글 작성 -> insert 
+  		+
+  	 작성자의 포인트 1증가 -> update
+  2) 포인트 제약조건 설정	 : 3보다 크면 오류 발생
+  
+  A. noitces, member 테이블 + 제약조건 설정
+  	1) member 테이블에 point 칼럼 추가
+  	AltER Table member
+	add (point number(10) default(0));
+	2) notices 테이블에 title 칼럼을 유일성 제약 조건
+	  uk_notices_title -- 유일성 제약 조건
+	  pk_notices_seq
+  B. MemberVO.java -> point 필드 추가
+  C. NoticeDao.java 인터페이스
+  	public void insertAndPointUpOfMember(NoticeVO notice, String id) throws ClassNotFoundException, SQLException; 추가
+  D. NoticeDaoImpl.java overriding
+  E. CustomerController.java - 공지사항 쓰기의 컨트롤러 메서드 수정
+  
+  F.
+  	select *
+	from member
+	where id='MSg';
+	
+	update member
+	set point = 1
+	where id='MSg';
+	commit;
+
+  G. TM 트랜잭션 매니저 - root-context.xml 설정 확인
+  	
+  	트랜잭션 템플릿 등록
+  	<bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="transactionManager" />	
+	</bean>
+    
+	

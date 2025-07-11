@@ -1,0 +1,9 @@
+[수업내용정리] 스프링 트랜잭션 처리
+
+p.522 선언적 트랜잭션 처리 2가지 방법 중
+	ㄴ @Transactional 어노테이션 사용
+	ㄴ <tx:annotation-driven> 설정을 추가(기억)
+
+1. SL09_NLTRANSACTION2_TXADVICE - > SL09_NLTRANSACTION3_ANNOTATION
+
+2. 

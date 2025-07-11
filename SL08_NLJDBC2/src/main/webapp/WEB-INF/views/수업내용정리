@@ -1,0 +1,20 @@
+[수업내용정리] 파일 업로드
+	스프링 JDBC
+
+1. SL08_NLJDBC	-> SL08_NLJDBC2
+   JdbcTemplate		[NamedParameter]JdbcTemplate p496
+		?				:파라미터이름
+	
+2. NoticeDao.java 인터페이스 처리
+   NoticeDaoImpl.java 구현한 클래스
+
+3. 
+   index.jsp 메인 페이지 <- org.doit.ik.HomeController.java
+   
+4. 공지사항 컨트롤러 CustomerController.java
+		ㄴ 컨트롤러 메서드
+		ㄴ 컨트롤러 메서드
+		ㄴ 컨트롤러 메서드
+			:
+
+5. 회원(멤버) 컨트롤러 JoinController.java

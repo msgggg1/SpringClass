@@ -1,0 +1,56 @@
+[수업내용정리] 스프링 트랜잭션 처리
+
+p.511 전파방식
+	ㄴ @Transactional 어노테이션 사용
+	ㄴ <tx:annotation-driven> 설정을 추가(기억)
+
+1. SL09_NLTRANSACTION3_ANNOTATION - > SL09_NLTRANSACTION4_PROPAGATITON
+
+2. 전파 방식 ?
+	현재 트랜잭션이 처리 중인 메서드 안에서
+	또 다른 트랜잭션 처리 메서드를 호출하는 경우
+	>>중첩된<< 트랜잭션을 어떻게 처리할 지 결정하는 속성
+	
+	예) 
+	@T 
+	aaa(){
+		// insert
+		// update
+		// delete
+		
+	}
+	
+3.  실습
+	@T
+	NoticeDaoImpl.insertAndPOintUPOfMember(){
+		insert();
+		insert();
+	}
+
+	@T
+	NoticeDaoImpl.insertAndPOintUPOfMember() -> insert()
+		1) 공지사항 글 쓰기 (insert)
+		2) 작성자의 포인트 + 1
+		
+	insertAndPointUpOfMember 트X
+	  [insert() 트 O]  [insert() 트 O]
+    트랜잭션 안먹음
+    문제 상황) 부모 insertAndPointUpOfMember()트랜잭션 처리 x
+    			{
+    				[insert @T]
+    				[insert @T] -> 트랜잭션 처리 x, TEST 8 -two insert O
+    			}		
+    			이유: 클래스 내에서 다른 메소드를 호출하는 구조로는 AOP 방식으로 트랜잭션 처리가 되지 않는다.
+    			해결방법: insertAndPointUpOfMember() 메소드와
+    					insert() 메소드를 클래스 다르게 해서 분리
+    			처리 : MemberShipService.insertAndPointUpOfMember() 선언
+    				  NoticeDaoImpl.insert() 선언
+    			
+    			
+    			
+    			
+		
+		
+		
+		
+		
