@@ -1,6 +1,70 @@
 [수업내용정리] 스프링 트랜잭션 처리
 
 p.511 격리레벨(isolation)
-
+					 전파방식 - 하나의 트랜잭션 insert, update
 SL09_NLTRANSACTION4_PROPAGATITION -> SL09_NLTRANSACTION5_ISOLATION
 
+[ 격리 레벨 (격리성, 격리 수준) ]
+ ㄴ 트랜잭션 처리 과정에서 
+   두 개 이상의 트랜잭션이 서로 동시에 같은 자원을 접근할 때의 
+   각각의 트랜잭션은 어떻게 처리해야하는가?
+   
+ 예) 화장실 1칸					동기화 처리
+   A	 공유자원
+   B 	[화장실 1칸]
+   C    잠금		해제
+   :
+   사람
+     줄세우기
+     
+ 예) 동기화 처리 설명
+  a4접, 봉	풀
+  15개 		20개 -> 시간 남아도 풀칠하면 안됨
+      봉(공유자원)
+      
+ 용어 개념)
+ NoticeDao 인터페이스
+  ㄴ 조회수 증가 hitUp()	hitUp()
+  ㄴ 조회수를 읽어오는 메서드	getHit()
+  
+  1) Dirty Read 상황
+  	 @T [hitUp()]
+  	 [ seq=16  10 		update 1증가 11			   		커밋, 롤백]
+  	 								    @T [getHit()]
+  2) Non-Repeatable Read 상황 : 하나의 트랜잭션 안에서 같은 작업이 반복 할때 중간에 다른 작업에 의해 실행결과가 다를때
+  	 반복적인(2번 이상) 작업
+  	      조회수 읽기				   			조회수 읽기
+  	 [ @T	[getHit()]					@T	[getHit()]	]
+  	 			10		@T [hitUp()]			11
+  	 						11
+  3) Phantom Read 상황. 
+  	여러 개의 레코드를 읽어오는 작업을 반복할 때
+  	
+  	[30번부서원 조회					30번부서원 조회]
+  	  1									1
+  	  2
+  	  3				insert/delete
+  	  4
+  	  5
+  	  6									6
+  	  
+ 제약조건 확인 삭제
+  1) 포인트 < 3 체크제약조건 삭제
+  2) 제목이 중복 X  유일성 제약조건 삭제
+  
+select * from user_constraints
+where table_name = 'MEMBER';
+where table_name = 'NOTICES';
+-- 제약조건 삭제
+UK_NOTICES_TITLE
+CK_MEMBER_POINT
+
+ALTER TABLE NOTICES 
+DROP CONSTRAINT UK_NOTICES_TITLE;
+ 	  
+ALTER TABLE MEMBER 
+DROP CONSTRAINT CK_MEMBER_POINT; 	  
+ 
+  	  
+  	  
+  	  

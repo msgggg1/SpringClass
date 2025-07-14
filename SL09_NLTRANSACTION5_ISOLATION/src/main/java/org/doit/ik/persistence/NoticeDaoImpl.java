@@ -180,6 +180,32 @@ public class NoticeDaoImpl implements NoticeDao{
 	}
 
 
+	@Override
+	@Transactional(isolation= Isolation.DEFAULT)
+	public void hitUp(String seq) throws ClassNotFoundException, SQLException {
+		String sql = "UPDATE notices "
+				+ " SET hit = hit + 1"
+				+ " WHERE seq = :seq ";
+		
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("seq", seq);
+		this.npJdbcTemplate.update(sql, paramSource);
+		
+	}
+
+
+	@Override
+	public int getHit(String seq) throws ClassNotFoundException, SQLException {
+		String sql = "SELECT hit"
+				+ " FROM notices"
+				+ " WHERE seq = :seq ";	
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("seq", seq);		
+		return this.npJdbcTemplate.queryForObject(sql, paramMap, Integer.class);
+	}
+
+
 	// [1] 트랜잭션 처리가 되지 않은 메서드 (문제 발생 확인용)
 	/*
 	@Override

@@ -393,6 +393,7 @@ public class CustomerController {
 	// [2]
 	@GetMapping("/noticeDetail.htm")
 	public String noticeDetail(@RequestParam("seq") String seq, Model model) throws Exception {
+		this.noticeDao.hitUp(seq); // 조회수 증가
 		NoticeVO  notice  = this.noticeDao.getNotice(seq);      
 
 		model.addAttribute("notice", notice);
