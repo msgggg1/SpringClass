@@ -1,85 +1,19 @@
 [수업내용정리] 
-Tiles 사용해서 페이지 모듈화(집중화)
 
-1. WEB-INF/views 폴더에는 모든 jsp 파일을 이동.
-2. webapp 폴더
-	ㄴ inc							== layout 폴더
-		ㄴ footer.jsp
-		ㄴ header.jsp
-		ㄴ layout.jsp				== template.jsp
-
-3. webapp 
-	ㄴ customer
-		ㄴ inc
-			ㄴ aside.jsp
-			ㄴ visual.jsp
-			ㄴ layout.jsp
-
-4. webapp 
-	ㄴ joinus
-		ㄴ inc
-			ㄴ aside.jsp
-			ㄴ visual.jsp
-			ㄴ layout.jsp
-			
-5. notice.jsp
-6. login.jsp
---------------------------------------------------------------------
-pom.xml 7.tiles
-<!-- 7. Tiles -->
-		<dependency>
-           <groupId>org.apache.tiles</groupId>
-           <artifactId>tiles-extras</artifactId>
-           <version>${org.apache.tiles-version}</version>
-         </dependency>
-         <dependency>
-            <groupId>org.apache.tiles</groupId>
-            <artifactId>tiles-core</artifactId>
-            <version>${org.apache.tiles-version}</version>
-          </dependency>  
-          <dependency>
-            <groupId>org.apache.tiles</groupId>
-            <artifactId>tiles-servlet</artifactId>
-            <version>${org.apache.tiles-version}</version>
-          </dependency>
-          <dependency>
-            <groupId>org.apache.tiles</groupId>
-            <artifactId>tiles-jsp</artifactId>
-            <version>${org.apache.tiles-version}</version>
-          </dependency>
-	</dependencies>
-	
-	
-servlet-context.xml
-	<beans:bean id="tilesConfigurer"
-		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
-		<beans:property name="definitions">
-			<beans:list>
-				<beans:value>/WEB-INF/tiles/tiles.xml</beans:value>
-			</beans:list>
-		</beans:property>
-	</beans:bean>
-		<beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver"> 
-		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" 
-		/> <beans:property name="order" value="1" /> </beans:bean> 
----------------------------------
-1) CustomerController.java 수정
-	JoinController 수정
-	HomeController 수정
-	
-2) tiles.xml 수정
-	
-2) layout.jsp 수정
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
-
-
-------------------------------------------------------------------
-모든 jsp 파일은 WEB-INF/views 폴더로 이동( 외부에 숨기기 )
-
-
-
-
-
-
-
+[ mybatis 수업 ]
+1. 개발자가 지정한 SQL, 저장프로시저 그리고 몇가지 고급 매핑을 지원하는 퍼시스턴스 프레임워크
+2. JDBC로 처리하는 상당부분의 코드와 파라미터 설정및 결과 매핑을 대신해준다.
+3. 데이터베이스 레코드에 원시타입과 Map 인터페이스 그리고 자바 POJO 를 설정해서 매핑하기 위해 XML과 애노테이션을 사용할 수 있다.
+4. 실습
+	org.doit.ik.persistence 패키지 수정
+	 ㄴ MemberDao.java, NoticeDao.java 삭제
+	org.doit.ik.mapper 패키지
+	 ㄴ MemberMapper.java, NoticeMapper.java 복붙
+	src/main/resources
+		ㄴ org
+			ㄴ doit
+				ㄴ ik
+					ㄴ mapper
+						ㄴ MemberMapper.xml
+						ㄴ NoticeMapper.xml
 

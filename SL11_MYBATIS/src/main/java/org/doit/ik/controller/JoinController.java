@@ -3,7 +3,7 @@ package org.doit.ik.controller;
 import java.beans.PropertyEditorSupport;
 
 import org.doit.ik.domain.MemberVO;
-import org.doit.ik.persistence.MemberDao;
+import org.doit.ik.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -21,7 +21,7 @@ import lombok.extern.log4j.Log4j;
 public class JoinController {
 	
 	@Autowired
-	private MemberDao memberDao;
+	private MemberMapper memberDao;
 	
 	// 회원가입  /joinus/join.htm ->	/joinus/join.jsp
 	@GetMapping("/join.htm")
