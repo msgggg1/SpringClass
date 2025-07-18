@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.doit.ik.mapper.DeptMapper">
+
+  	<!-- List<DeptVO> getDeptList(); -->
+  	<select id="getDeptList" resultType="org.doit.ik.domain.DeptVO">
+  		SELECT deptno, dname, loc
+  		FROM dept
+  		ORDER BY deptno ASC
+  	</select>
+  
+  	<!-- Integer insertDept(); -->
+<!--  <insert id="insertDept">
+  		INSERT INTO dept (deptno, dname, loc) 
+  		VALUES ((SELECT COALESCE(MAX(deptno), 0) + 10 FROM dept) , #{dname} , #{loc}) 
+  	</insert>  -->
+  	
+   	<insert id="insertDept" parameterType="org.doit.ik.domain.DeptVO">
+   <selectKey keyProperty="deptno" order="BEFORE" resultType="int">
+     SELECT NVL(MAX(deptno), 0) + 10 
+     FROM dept
+   </selectKey>
+      INSERT INTO dept (deptno, dname, loc)
+      VALUES (#{deptno}, #{dname}, #{loc})
+   </insert> 
+   
+   <!-- DeptVO getDept(@Param("deptno") int deptno) ;     -->
+   <select id="getDept" resultType="org.doit.ik.domain.DeptVO">
+      SELECT deptno, dname, loc
+      FROM dept
+      WHERE deptno = #{deptno}
+   </select>
+   
+   <!-- int updateDept(DeptVO deptVO) ;  -->
+   <update id="updateDept" parameterType="org.doit.ik.domain.DeptVO">
+      UPDATE dept
+      <set>
+         <if test="dname != null">
+            dname = #{dname},
+         </if>
+         <if test="loc != null">
+            loc = #{loc},
+         </if>
+      </set>
+      WHERE deptno = #{deptno}
+   </update>
+   
+   <!-- int deleteDept(@Param("deptno") int deptno) ; -->
+   <delete id="deleteDept" parameterType="int">
+     DELETE FROM dept
+     WHERE deptno = #{deptno}
+   </delete>
+   
+</mapper>  

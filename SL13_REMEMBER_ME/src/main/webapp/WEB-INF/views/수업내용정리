@@ -1,0 +1,29 @@
+[수업내용정리] 
+
+1. 한 번 로그인하면 일정 시간 동안 다시 로그인 하지 않아도 되는 기능.
+2. 영어로 remember-me
+3. 대부분 쿠키(cookie)를 이용해서 구현.
+4. 스프링 시큐리티의 경우 (내부적으로 쿠키 사용)
+    1) 메모리 상에서 처리하거나 
+    2) DB를 이용하는 형태로 구현 가능 (안전)
+5. security-context.xml
+    ㄴ <security:remember-me> 태그 추가  
+    <security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/> // 7일
+  </security:http> 
+       내부적으로 DB 연동 -> dataSource 사용
+6. 테이블 
+    ㄴ Table PERSISTENT_LOGINS 생성
+ create table persistent_logins
+ (
+     username varchar2(64) not null
+   , series varchar2(64) primary key
+   , token varchar2(64) not null
+   , last_used date not null   
+ ); 
+ 
+7. 자동 로그인에서 DB를 이용하는 설정은 별도의 설정없이 data-source-ref만 지정하면 된다.
+ 
+8. login.jsp
+ <li><label for="remember-me"> Remember-Me </label><input type="checkbox"
+                  name="remember-me" class="text" id="remember-me" /></li>   
+                  
